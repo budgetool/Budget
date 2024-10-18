@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income and Expense Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .section-title {
+            background-color: #eaeaea;
+            font-weight: bold;
+            text-align: left;
+        }
+        .total-row {
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Income and Expense Calculator</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Current</th>
+                <th>Adjusted</th>
+                <th>Amount Saved</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Income Section -->
+            <tr class="section-title"><td colspan="4">Income</td></tr>
+            <tr>
+                <td>Employment Income 1</td>
+                <td><input type="number" id="income1"></td>
+                <td><input type="number"></td>
+                <td><input type="number"></td>
+            </tr>
+            <tr>
+                <td>Employment Income 2</td>
+                <td><input type="number" id="income2"></td>
+                <td><input type="number"></td>
+                <td><input type="number"></td>
+            </tr>
+            <!-- Add other rows for income -->
+
+            <tr class="section-title"><td colspan="4">Expenses</td></tr>
+            <tr>
+                <td>Mortgage/Rent</td>
+                <td><input type="number" id="mortgageRent"></td>
+                <td><input type="number"></td>
+                <td><input type="number"></td>
+            </tr>
+            <tr>
+                <td>Vehicle Payment 1</td>
+                <td><input type="number" id="vehicle1"></td>
+                <td><input type="number"></td>
+                <td><input type="number"></td>
+            </tr>
+            <!-- Add other rows for expenses -->
+
+            <!-- Add more sections for other categories (Utilities, Food, etc.) -->
+        </tbody>
+    </table>
+    
+    <!-- Ratio Calculations -->
+    <h2>Calculations</h2>
+    <div>
+        <p>Front-End Ratio: <span id="frontEndRatio">0</span>%</p>
+        <p>Back-End Ratio: <span id="backEndRatio">0</span>%</p>
+        <button onclick="calculateRatios()">Calculate Ratios</button>
+    </div>
+
+    <script>
+        function calculateRatios() {
+            // Income
+            let income1 = parseFloat(document.getElementById("income1").value) || 0;
+            let income2 = parseFloat(document.getElementById("income2").value) || 0;
+            let totalIncome = income1 + income2;
+
+            // Expenses
+            let mortgageRent = parseFloat(document.getElementById("mortgageRent").value) || 0;
+            let vehicle1 = parseFloat(document.getElementById("vehicle1").value) || 0;
+
+            // Front-End Ratio: Housing costs / Total Income
+            let frontEndRatio = ((mortgageRent / totalIncome) * 100).toFixed(2);
+
+            // Back-End Ratio: Total Debt (housing + other) / Total Income
+            let totalDebt = mortgageRent + vehicle1;
+            let backEndRatio = ((totalDebt / totalIncome) * 100).toFixed(2);
+
+            // Display the results
+            document.getElementById("frontEndRatio").innerText = frontEndRatio || "0";
+            document.getElementById("backEndRatio").innerText = backEndRatio || "0";
+        }
+    </script>
+</body>
+</html>
